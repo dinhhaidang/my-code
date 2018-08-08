@@ -28,13 +28,12 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_
 chmod 755 get_helm.sh
 ./get_helm.sh
 helm init
-helm update
 
 #-----------------Setup Permissions in the cluster for Helm (install packet in helm)-------#
-echo "Setup Permissions in the cluster for Helm........"
-kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
-kubectl create serviceaccount tiller --namespace kube-system
-kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+echo "---------------------Setup Permissions in the cluster for Helm----------------------------"
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 
 #-----------------Setup Jenkins----------------------#
 helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
@@ -46,10 +45,14 @@ kubectl get pods
 kubectl get svc
 
 #get password dang nhap Jenkins web UI
-printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+printf $(kubectl get secret my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
 #---------------Trien khai source mau de chay pipeline---------------#
-cd continuous-deployment-on-kubernetes/sample-app
+echo "#------------------Chuyen den thu muc source code-------------------------#"
+cd continuous-deployment-on-kubernetes/sample-app/
+echo "------------------------------------"
+pwd
+echo "------------------------------------"
 
 #tao namespace cho viec trien khai bo source
 kubectl create ns production
@@ -76,7 +79,7 @@ git config --global user.email "dinh@cloud-ace.com"
 git config --global user.name "dinh@cloud-ace.com"
 
 #Add, commit, va push source len repositories cua google
-git add
+git add .
 git commit -m "Initial commit"
 git push origin master
 
