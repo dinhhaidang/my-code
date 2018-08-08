@@ -1,0 +1,8 @@
+
+
+##scale nginx
+kubectl scale deployment my-nginx --replicas=0; 
+kubectl scale deployment my-nginx --replicas=2;
+
+##scale statefullset
+kubectl scale statefulsets <stateful-set-name> --replicas=<new-replicas>

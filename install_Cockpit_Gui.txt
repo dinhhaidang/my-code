@@ -1,0 +1,85 @@
+
+##Tai json ve 
+wget https://raw.githubusercontent.com/cockpit-project/cockpit/master/containers/kubernetes-cockpit.json
+
+##Tao namespace
+kubectl create namespace cockpit-demo
+
+##Dieu chinh lai file json
+{
+   "kind":"List",
+   "apiVersion":"v1",
+   "items":[
+      {
+         "kind":"ReplicationController",
+         "apiVersion":"v1",
+         "metadata":{
+            "name":"kubernetes-cockpit",
+            "labels":{
+               "name":"kubernetes-cockpit"
+            }
+         },
+         "spec":{
+            "replicas":1,
+            "selector":{
+               "name":"kubernetes-cockpit"
+            },
+            "template":{
+               "metadata":{
+                  "labels":{
+                     "name":"kubernetes-cockpit"
+                  }
+               },
+               "spec":{
+                  "containers":[{
+                    "name": "kubernetes-cockpit",
+                    "image": "cockpit/kubernetes:latest",
+                    "ports":[{
+                        "containerPort":9090,
+                        "protocol":"TCP"
+                     }],
+                    "env":[{
+                        "name": "KUBE_INSECURE",
+                        "value": "false"
+                    }]
+                  }]
+               }
+            }
+         }
+      },
+      {
+         "kind":"Service",
+         "apiVersion":"v1",
+         "metadata":{
+            "name":"kubernetes-cockpit",
+            "labels":{
+               "name":"kubernetes-cockpit"
+            }
+         },
+         "spec":{
+             "type": "LoadBalancer",
+             "ports": [{
+                 "protocol": "TCP",
+                 "port": 443,
+                 "targetPort": 9090
+             }],
+            "selector":{
+               "name":"kubernetes-cockpit"
+            }
+         }
+      }
+   ]
+}
+
+##Tao service tu file json trong namespace
+kubectl create -f kubernetes-cockpit.json -n cockpit-demo
+
+##Lay thong tin service
+kubectl get svc -n cockpit-demo
+
+##Truy cap vao dia chia Loadbalacing
+
+##Dang nhap su dung tk "Show credentials" tren cluster
+
+
+
