@@ -73,7 +73,12 @@ git remote add origin https://source.developers.google.com/p/vn-cloudace-dataeng
 git config --global user.email "dinh@cloud-ace.com"
 git config --global user.name "dinh@cloud-ace.com"
 
-#
+#Add, commit, va push source len repositories cua google
+git add
+git commit -m "Initial commit"
+git push origin master
+
+
 
 
 
