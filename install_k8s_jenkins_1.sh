@@ -16,6 +16,8 @@ git clone https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubern
 gcloud container clusters create demo-jenskin \
 --num-nodes 3 \
 --machine-type n1-standard-2 \
+--disk-type pd-ssd \
+--disk-size 20 \
 --scopes "https://www.googleapis.com/auth/projecthosting,cloud-platform"
 
 #Chung thuc cum cluster vua moi tao
@@ -29,13 +31,13 @@ helm init
 helm update
 
 #-----------------Setup Permissions in the cluster for Helm (install packet in helm)-------#
+echo "Setup Permissions in the cluster for Helm........"
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
-# Grant Tiller the server side of Helm, the cluster-admin role in your cluste
 kubectl create serviceaccount tiller --namespace kube-system
 kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
 #-----------------Setup Jenkins----------------------#
-helm install stable/jenkins
+helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
 
 #get pod
 kubectl get pods
