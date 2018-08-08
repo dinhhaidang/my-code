@@ -13,6 +13,9 @@ gcloud config set compute/zone asia-east1-a
 git clone https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes.git
 
 #Tao he thong K8S
+echo "#-------------------------------------------------------------------#"
+echo "#-----------------Dang tao cluster kubernetes-----------------------#"
+echo "#-------------------------------------------------------------------#"
 gcloud container clusters create demo-jenskin \
 --num-nodes 3 \
 --machine-type n1-standard-2 \
@@ -35,8 +38,14 @@ kubectl create serviceaccount --namespace kube-system tiller
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 
-#-----------------Setup Jenkins----------------------#
+
+echo "#-------------------------------------------------------------------#"
+echo "#-----------Chuan bi setup jenkins, cho 1 phut se bat dau-----------#"
+echo "#-------------------------------------------------------------------#"
+sleep 1m
+echo "#-----------------Setup Jenkins----------------------#"
 helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
+
 
 #get pod
 kubectl get pods
@@ -45,10 +54,12 @@ kubectl get pods
 kubectl get svc
 
 #get password dang nhap Jenkins web UI
-printf $(kubectl get secret my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
 #---------------Trien khai source mau de chay pipeline---------------#
-echo "#------------------Chuyen den thu muc source code-------------------------#"
+echo "#-------------------------------------------------------------------#"
+echo "#-------------------Chuyen den thu muc source code------------------#"
+echo "#-------------------------------------------------------------------#"
 cd continuous-deployment-on-kubernetes/sample-app/
 echo "------------------------------------"
 pwd
