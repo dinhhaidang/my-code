@@ -26,7 +26,6 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_
 chmod 755 get_helm.sh
 ./get_helm.sh
 helm init
-helm version
 helm update
 
 #-----------------Setup Permissions in the cluster for Helm (install packet in helm)-------#
@@ -36,7 +35,7 @@ kubectl create serviceaccount tiller --namespace kube-system
 kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
 #-----------------Setup Jenkins----------------------#
-helm install stable/jenkins -f jenkins/values.yaml
+helm install stable/jenkins
 
 #get pod
 kubectl get pods
