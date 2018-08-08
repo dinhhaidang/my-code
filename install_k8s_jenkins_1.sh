@@ -47,7 +47,7 @@ kubectl get svc
 printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
 #---------------Trien khai source mau de chay pipeline---------------#
-cd sample-app
+cd continuous-deployment-on-kubernetes/sample-app
 
 #tao namespace cho viec trien khai bo source
 kubectl create ns production
@@ -64,6 +64,7 @@ kubectl --namespace=production scale deployment gceme-frontend-production --repl
 kubectl --namespace=production get service gceme-frontend
 
 #---------Tao repository Registry tren GCP va authencication--------------
+git init
 git config credential.helper gcloud.sh
 gcloud source repos create demo-jenkins
 git remote add origin https://source.developers.google.com/p/vn-cloudace-dataengine-2018/r/demo-jenkins
