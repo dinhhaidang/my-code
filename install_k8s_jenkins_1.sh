@@ -14,7 +14,7 @@ git clone https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubern
 
 #Tao he thong K8S
 echo "#-------------------------------------------------------------------#"
-echo "#-----------------Dang tao cluster kubernetes-----------------------#"
+echo "#                 Dang tao cluster kubernetes                       #"
 echo "#-------------------------------------------------------------------#"
 gcloud container clusters create demo-jenskin \
 --num-nodes 3 \
@@ -40,7 +40,7 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 
 
 echo "#-------------------------------------------------------------------#"
-echo "#-----------Chuan bi setup jenkins, cho 1 phut se bat dau-----------#"
+echo "#            Chuan bi setup jenkins, cho 1 phut se bat dau          #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
@@ -53,22 +53,23 @@ kubectl get pods
 #get service (LoadBalancer) de thay IP external cua jenkins UI
 kubectl get svc
 
-#get password dang nhap Jenkins web UI
+echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
 printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+echo "#-------------------------------------------------------------------#"
 
 #---------------Trien khai source mau de chay pipeline---------------#
 echo "#-------------------------------------------------------------------#"
-echo "#-------------------Chuyen den thu muc source code------------------#"
+echo "#                   Chuyen den thu muc source code                  #"
 echo "#-------------------------------------------------------------------#"
 cd continuous-deployment-on-kubernetes/sample-app/
 echo "------------------------------------"
 pwd
 echo "------------------------------------"
 
-#tao namespace cho viec trien khai bo source
+echo "#-------------------------------------------------------------------#"
+echo "#           Tao namespace va deploy dich vu lan dau tien            #"
+echo "#-------------------------------------------------------------------#"
 kubectl create ns production
-
-#--------------Deploy lan dau tien de chay dich vu-----------------#
 kubectl --namespace=production apply -f k8s/production
 kubectl --namespace=production apply -f k8s/canary
 kubectl --namespace=production apply -f k8s/services
