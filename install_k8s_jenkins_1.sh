@@ -13,10 +13,11 @@ gcloud config set compute/zone asia-east1-a
 echo "#-------------------------------------------------------------------#"
 echo "#                 Dang tao cluster kubernetes                       #"
 echo "#-------------------------------------------------------------------#"
-gcloud container clusters create demo-jenskin \
+gcloud beta container clusters create demo-jenskin \
 --num-nodes 3 \
 --machine-type n1-standard-2 \
 --disk-type pd-ssd \
+--disk-size 20
 
 #Chung thuc cum cluster vua moi tao
 gcloud container clusters get-credentials demo-jenskin
