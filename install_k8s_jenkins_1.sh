@@ -17,7 +17,6 @@ gcloud container clusters create demo-jenskin \
 --num-nodes 3 \
 --machine-type n1-standard-2 \
 --disk-type pd-ssd \
---scopes "https://www.googleapis.com/auth/projecthosting,cloud-platform"
 
 #Chung thuc cum cluster vua moi tao
 gcloud container clusters get-credentials demo-jenskin
