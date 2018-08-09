@@ -98,7 +98,7 @@ git push origin master
 echo -e "\n\n"
 
 echo "#-------------------------------------------------------------------#"
-echo "#                HE THONG DA XAY DUNG MOI TRUONG XONG!              #"
+echo "#            HE THONG DA HOAN THANH XAY DUNG MOI TRUONG!            #"
 echo "#                      --------Thanks-------                        #"
 echo "#-------------------------------------------------------------------#"
 
