@@ -45,16 +45,13 @@ echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
 helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
-echo "\n\n"
-#get pod
+echo "\n"
 
-echo "#----------------Thong tin ve pods------------------#"
-kubectl get pods
-echo "\n\n"
-
-echo "#----------------Thong tin ve services------------------#"
-kubectl get svc
-echo "\n\n"
+echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
+wget https://raw.githubusercontent.com/cockpit-project/cockpit/master/containers/kubernetes-cockpit.json
+kubectl create namespace cockpit-demo
+kubectl create -f kubernetes-cockpit.json -n cockpit-demo
+echo "\n"
 
 #---------------Trien khai source mau de chay pipeline---------------#
 echo "#-------------------------------------------------------------------#"
@@ -107,6 +104,10 @@ echo "\n"
 
 echo "#----------------Thong tin front-end web UI------------------#"
 kubectl --namespace=production get service gceme-frontend
+echo "\n"
+
+echo "#-----------------Thong tin web UI Cockpit-------------------#"
+kubectl get svc -n cockpit-demo
 echo "\n"
 
 echo "#-------------------------------------------------------------------#"
