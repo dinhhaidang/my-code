@@ -53,11 +53,6 @@ echo "#----------------Thong tin ve services------------------#"
 kubectl get svc
 echo "\n\n"
 
-echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
-printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
-echo "#-------------------------------------------------------------------#"
-echo "\n\n"
-
 #---------------Trien khai source mau de chay pipeline---------------#
 echo "#-------------------------------------------------------------------#"
 echo "#                   Chuyen den thu muc source code                  #"
@@ -78,9 +73,6 @@ kubectl --namespace=production apply -f k8s/services
 
 #Scale he thong frontend tu 1 len 4 ban (replicas=4)
 kubectl --namespace=production scale deployment gceme-frontend-production --replicas=4
-
-#get IP external front-end system sau khi deployment
-kubectl --namespace=production get service gceme-frontend
 echo "\n\n"
 
 #---------Tao repository Registry tren GCP va authencication--------------
@@ -97,6 +89,20 @@ git add .
 git commit -m "Initial commit"
 git push origin master
 echo "\n\n"
+sleep 30s
+
+echo "#----------------Thong tin truy cap Jenkins UI------------------#"
+kubectl get svc
+echo "\n"
+
+echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
+printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+echo "#-------------------------------------------------------------------#"
+echo "\n"
+
+echo "#----------------Thong tin truy cap Front-End------------------#"
+kubectl --namespace=production get service gceme-frontend
+echo "\n"
 
 echo "#-------------------------------------------------------------------#"
 echo "#            HE THONG DA HOAN THANH XAY DUNG MOI TRUONG!            #"
