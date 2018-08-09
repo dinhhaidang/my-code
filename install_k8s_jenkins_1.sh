@@ -36,22 +36,26 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 
 
 echo "#-------------------------------------------------------------------#"
-echo "#            Chuan bi setup jenkins, cho 1 phut se bat dau          #"
+echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
 helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
-
-
+echo -e "\n\n"
 #get pod
-kubectl get pods
 
-#get service (LoadBalancer) de thay IP external cua jenkins UI
+echo "#----------------Thong tin ve pods------------------#"
+kubectl get pods
+echo -e "\n\n"
+
+echo "#----------------Thong tin ve services------------------#"
 kubectl get svc
+echo -e "\n\n"
 
 echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
 printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 echo "#-------------------------------------------------------------------#"
+echo -e "\n\n"
 
 #---------------Trien khai source mau de chay pipeline---------------#
 echo "#-------------------------------------------------------------------#"
@@ -61,6 +65,7 @@ cd demo-app/
 echo "------------------------------------"
 pwd
 echo "------------------------------------"
+echo -e "\n\n"
 
 echo "#-------------------------------------------------------------------#"
 echo "#           Tao namespace va deploy dich vu lan dau tien            #"
@@ -75,6 +80,7 @@ kubectl --namespace=production scale deployment gceme-frontend-production --repl
 
 #get IP external front-end system sau khi deployment
 kubectl --namespace=production get service gceme-frontend
+echo -e "\n\n"
 
 #---------Tao repository Registry tren GCP va authencication--------------
 echo "#-------------------------------------------------------------------#"
@@ -89,7 +95,12 @@ git config --global user.name "dinh@cloud-ace.com"
 git add .
 git commit -m "Initial commit"
 git push origin master
+echo -e "\n\n"
 
+echo "#-------------------------------------------------------------------#"
+echo "#                HE THONG DA XAY DUNG MOI TRUONG XONG!              #"
+echo "#                      --------Thanks-------                        #"
+echo "#-------------------------------------------------------------------#"
 
 
 
