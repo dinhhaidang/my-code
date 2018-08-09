@@ -89,7 +89,8 @@ git add .
 git commit -m "Initial commit"
 git push origin master
 echo "\n"
-sleep 1m
+echo "Vui long cho trong giay lat, he thong dang lay thong tin cau hinh...."
+sleep 2m
 
 echo "#----------------Thong tin truy cap Jenkins UI------------------#"
 kubectl get svc
