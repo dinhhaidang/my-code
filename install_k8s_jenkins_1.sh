@@ -27,6 +27,7 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_
 chmod 755 get_helm.sh
 ./get_helm.sh
 helm init
+echo "\n\n"
 
 #-----------------Setup Permissions in the cluster for Helm (install packet in helm)-------#
 echo "------------Setup Permissions tren K8S de cai packet tren Helm------------------------"
@@ -41,21 +42,21 @@ echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
 helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
-echo -e "\n\n"
+echo "\n\n"
 #get pod
 
 echo "#----------------Thong tin ve pods------------------#"
 kubectl get pods
-echo -e "\n\n"
+echo "\n\n"
 
 echo "#----------------Thong tin ve services------------------#"
 kubectl get svc
-echo -e "\n\n"
+echo "\n\n"
 
 echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
 printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 echo "#-------------------------------------------------------------------#"
-echo -e "\n\n"
+echo "\n\n"
 
 #---------------Trien khai source mau de chay pipeline---------------#
 echo "#-------------------------------------------------------------------#"
@@ -65,7 +66,7 @@ cd demo-app/
 echo "------------------------------------"
 pwd
 echo "------------------------------------"
-echo -e "\n\n"
+echo "\n\n"
 
 echo "#-------------------------------------------------------------------#"
 echo "#           Tao namespace va deploy dich vu lan dau tien            #"
@@ -80,7 +81,7 @@ kubectl --namespace=production scale deployment gceme-frontend-production --repl
 
 #get IP external front-end system sau khi deployment
 kubectl --namespace=production get service gceme-frontend
-echo -e "\n\n"
+echo "\n\n"
 
 #---------Tao repository Registry tren GCP va authencication--------------
 echo "#-------------------------------------------------------------------#"
@@ -95,7 +96,7 @@ git config --global user.name "dinh@cloud-ace.com"
 git add .
 git commit -m "Initial commit"
 git push origin master
-echo -e "\n\n"
+echo "\n\n"
 
 echo "#-------------------------------------------------------------------#"
 echo "#            HE THONG DA HOAN THANH XAY DUNG MOI TRUONG!            #"
