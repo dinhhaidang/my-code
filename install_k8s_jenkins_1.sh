@@ -9,9 +9,6 @@
 #Cau hinh zone mac dinh tren GCP
 gcloud config set compute/zone asia-east1-a
 
-#Clone bo source code sample ve
-git clone https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes.git
-
 #Tao he thong K8S
 echo "#-------------------------------------------------------------------#"
 echo "#                 Dang tao cluster kubernetes                       #"
@@ -61,7 +58,7 @@ echo "#-------------------------------------------------------------------#"
 echo "#-------------------------------------------------------------------#"
 echo "#                   Chuyen den thu muc source code                  #"
 echo "#-------------------------------------------------------------------#"
-cd continuous-deployment-on-kubernetes/sample-app/
+cd demo-app/
 echo "------------------------------------"
 pwd
 echo "------------------------------------"
