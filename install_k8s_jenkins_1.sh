@@ -33,7 +33,7 @@ chmod 755 get_helm.sh
 helm init
 
 #-----------------Setup Permissions in the cluster for Helm (install packet in helm)-------#
-echo "---------------------Setup Permissions in the cluster for Helm----------------------------"
+echo "------------Setup Permissions tren K8S de cai packet tren Helm------------------------"
 kubectl create serviceaccount --namespace kube-system tiller
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
@@ -81,16 +81,15 @@ kubectl --namespace=production scale deployment gceme-frontend-production --repl
 kubectl --namespace=production get service gceme-frontend
 
 #---------Tao repository Registry tren GCP va authencication--------------
+echo "#-------------------------------------------------------------------#"
+echo "#        Push source code len repository registry Google Cloud      #"
+echo "#-------------------------------------------------------------------#"
 git init
 git config credential.helper gcloud.sh
 gcloud source repos create demo-jenkins
 git remote add origin https://source.developers.google.com/p/vn-cloudace-dataengine-2018/r/demo-jenkins
-
-#dinh danh chinh minh
 git config --global user.email "dinh@cloud-ace.com"
 git config --global user.name "dinh@cloud-ace.com"
-
-#Add, commit, va push source len repositories cua google
 git add .
 git commit -m "Initial commit"
 git push origin master
