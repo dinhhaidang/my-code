@@ -37,7 +37,7 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 
 #tao storage class ssd cho k8s
 kubectl apply -f ssd_storageclass.yaml
-kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.beta.kubernetes.io/is-default-class":"false"}}}'
 kubectl patch storageclass faster-ssd -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 echo "\n"
 
