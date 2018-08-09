@@ -88,8 +88,8 @@ git config --global user.name "dinh@cloud-ace.com"
 git add .
 git commit -m "Initial commit"
 git push origin master
-echo "\n\n"
-sleep 30s
+echo "\n"
+sleep 1m
 
 echo "#----------------Thong tin truy cap Jenkins UI------------------#"
 kubectl get svc
@@ -100,7 +100,7 @@ printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.j
 echo "#-------------------------------------------------------------------#"
 echo "\n"
 
-echo "#----------------Thong tin truy cap Front-End------------------#"
+echo "#----------------Thong tin front-end web UI------------------#"
 kubectl --namespace=production get service gceme-frontend
 echo "\n"
 
