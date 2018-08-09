@@ -48,9 +48,8 @@ helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
 echo "\n"
 
 echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
-wget https://raw.githubusercontent.com/cockpit-project/cockpit/master/containers/kubernetes-cockpit.json
 kubectl create namespace cockpit-demo
-kubectl create -f kubernetes-cockpit.json -n cockpit-demo
+kubectl create -f cockpit.json -n cockpit-demo
 echo "\n"
 
 #---------------Trien khai source mau de chay pipeline---------------#
