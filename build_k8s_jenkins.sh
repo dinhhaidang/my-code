@@ -47,12 +47,17 @@ echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
-helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
+helm install -n cd stable/jenkins -f jenkins/values.yaml --version 0.16.6 --wait
 echo "\n"
 
 echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
 kubectl create namespace cockpit-demo
 kubectl create -f cockpit.json -n cockpit-demo
+echo "\n"
+
+echo "----------------Setup monocular-----------------------"
+helm repo add monocular https://helm.github.io/monocular
+helm install monocular/monocular
 echo "\n"
 
 #---------------Trien khai source mau de chay pipeline---------------#
@@ -110,6 +115,10 @@ echo "\n"
 
 echo "#-----------------Thong tin web UI Cockpit-------------------#"
 kubectl get svc -n cockpit-demo
+echo "\n"
+
+echo "------------------ Thong tin monocular-----------------------#"
+kubectl get ingress
 echo "\n"
 
 echo "#-------------------------------------------------------------------#"
