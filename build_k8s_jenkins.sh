@@ -57,7 +57,7 @@ echo "\n"
 
 echo "----------------Setup monocular-----------------------"
 helm repo add monocular https://helm.github.io/monocular
-helm install monocular/monocular
+helm install --name my-monocular monocular/monocular
 echo "\n"
 
 #---------------Trien khai source mau de chay pipeline---------------#
@@ -105,7 +105,7 @@ kubectl get svc
 echo "\n"
 
 echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
-printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+printf $(kubectl get secret --namespace default cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 echo "#-------------------------------------------------------------------#"
 echo "\n"
 
