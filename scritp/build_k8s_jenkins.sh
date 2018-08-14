@@ -56,11 +56,8 @@ echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
-<<<<<<< HEAD:scritp/build_k8s_jenkins.sh
+cd ..
 helm install --name my-jenkins stable/jenkins -f jenkins/values.yaml 
-=======
-helm install -n cd stable/jenkins -f jenkins/values.yaml --version 0.16.6 --wait
->>>>>>> ab3dffe192b2186291a55ad3fc4ac7c021ea41cd:build_k8s_jenkins.sh
 echo "\n"
 
 echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
@@ -77,7 +74,7 @@ echo "\n"
 echo "#-------------------------------------------------------------------#"
 echo "#                   Chuyen den thu muc source code                  #"
 echo "#-------------------------------------------------------------------#"
-cd demo-app/
+cd ../demo-app/
 echo "------------------------------------"
 pwd
 echo "------------------------------------"
