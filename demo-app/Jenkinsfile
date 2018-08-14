@@ -19,7 +19,7 @@ spec:
   serviceAccountName: cd-jenkins
   containers:
   - name: golang
-    image: golang:1.10
+    image: golang:latest
     command:
     - cat
     tty: true
