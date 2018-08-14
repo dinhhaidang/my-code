@@ -58,7 +58,7 @@ echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
-helm install --name my-jenkins stable/jenkins -f jenkins/values.yaml --version 0.16.6 --wait
+helm install -n cd stable/jenkins -f jenkins/values.yaml --version 0.16.6 --wait
 echo "\n"
 
 echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
@@ -111,7 +111,7 @@ kubectl get svc
 echo "\n"
 
 echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
-printf $(kubectl get secret --namespace default cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 echo "#-------------------------------------------------------------------#"
 echo "\n"
 

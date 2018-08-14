@@ -1,5 +1,5 @@
 def project = 'vn-cloudace-dataengine-2018'
-def  appName = 'gceme'
+def  appName = 'demo'
 def  feSvcName = "${appName}-frontend"
 def  imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
