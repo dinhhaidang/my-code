@@ -56,12 +56,21 @@ echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
+<<<<<<< HEAD:scritp/build_k8s_jenkins.sh
 helm install --name my-jenkins stable/jenkins -f jenkins/values.yaml 
+=======
+helm install -n cd stable/jenkins -f jenkins/values.yaml --version 0.16.6 --wait
+>>>>>>> ab3dffe192b2186291a55ad3fc4ac7c021ea41cd:build_k8s_jenkins.sh
 echo "\n"
 
 echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
 kubectl create namespace cockpit-demo
 kubectl create -f cockpit.json -n cockpit-demo
+echo "\n"
+
+echo "----------------Setup monocular-----------------------"
+helm repo add monocular https://helm.github.io/monocular
+helm install --name my-monocular monocular/monocular
 echo "\n"
 
 #---------------Trien khai source mau de chay pipeline---------------#
@@ -109,7 +118,7 @@ kubectl get svc
 echo "\n"
 
 echo "#------------------Mat khau dang nhap Jenkins-----------------------#"
-printf $(kubectl get secret --namespace default my-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+printf $(kubectl get secret --namespace default cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 echo "#-------------------------------------------------------------------#"
 echo "\n"
 
@@ -119,6 +128,10 @@ echo "\n"
 
 echo "#-----------------Thong tin web UI Cockpit-------------------#"
 kubectl get svc -n cockpit-demo
+echo "\n"
+
+echo "------------------ Thong tin monocular-----------------------#"
+kubectl get ingress
 echo "\n"
 
 echo "#-------------------------------------------------------------------#"
