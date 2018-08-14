@@ -7,14 +7,15 @@ Master:
     - git:3.9.1
     - google-oauth-plugin:0.6
     - google-source-plugin:0.3
+    - blueocean:1.7.2
   Cpu: "1"
-  Memory: "3500Mi"
+  Memory: "4000Mi"
   JavaOpts: "-Xms3500m -Xmx3500m"
   ServiceType: LoadBalancer
 Agent:
   Enabled: false
 Persistence:
-  Size: 50Gi
+  Size: 20Gi
 NetworkPolicy:
   ApiVersion: networking.k8s.io/v1
 rbac:
