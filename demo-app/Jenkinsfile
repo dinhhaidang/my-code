@@ -1,4 +1,4 @@
-def project = 'vn-cloudace-dataengine-2018'
+def project = 'PROJECT_ID'
 def  appName = 'gceme'
 def  feSvcName = "${appName}-frontend"
 def  imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
@@ -34,7 +34,7 @@ spec:
     - cat
     tty: true
 """
-    }
+}
   }
   stages {
     stage('Test') {

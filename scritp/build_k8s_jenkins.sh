@@ -9,15 +9,24 @@
 #Cau hinh zone mac dinh tren GCP
 gcloud config set compute/zone asia-east1-a
 
+
+gcloud compute networks create jenkins-demo
+
 #Tao he thong K8S
 echo "#-------------------------------------------------------------------#"
 echo "#                 Dang tao cluster kubernetes                       #"
 echo "#-------------------------------------------------------------------#"
 gcloud beta container clusters create demo-jenskin \
 --num-nodes 3 \
+--network jenkins-demo \
 --machine-type n1-standard-2 \
 --disk-type pd-ssd \
---disk-size 20
+--disk-size 20 \
+--scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+gcloud container clusters list
+sleep 15s
+
+kubectl get nodes
 
 #Chung thuc cum cluster vua moi tao
 gcloud container clusters get-credentials demo-jenskin
@@ -47,7 +56,7 @@ echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
-helm install --name my-jenkins stable/jenkins --set NetworkPolicy.Enabled=true
+helm install --name my-jenkins stable/jenkins -f jenkins/values.yaml 
 echo "\n"
 
 echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
