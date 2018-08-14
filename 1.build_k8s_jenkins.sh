@@ -123,6 +123,9 @@ echo "#-----------------Thong tin web UI Cockpit-------------------#"
 kubectl get svc -n cockpit-demo
 echo "\n"
 
+export POD_NAME=$(kubectl get pods -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
+
 echo "#-------------------------------------------------------------------#"
 echo "#            HE THONG DA HOAN THANH XAY DUNG MOI TRUONG!            #"
 echo "#                      --------Thanks-------                        #"

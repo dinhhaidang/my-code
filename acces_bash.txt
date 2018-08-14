@@ -1,2 +1,0 @@
-### Truy cập vào bash Pod
-kubectl exec -it "ten pod" -- /bin/bash
