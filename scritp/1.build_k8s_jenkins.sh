@@ -9,7 +9,9 @@
 #Cau hinh zone mac dinh tren GCP
 gcloud config set compute/zone asia-east1-a
 
-
+echo "#-------------------------------------------------------------------#"
+echo "#                 Dang tao network: jenkins-demo                    #"
+echo "#-------------------------------------------------------------------#"
 gcloud compute networks create jenkins-demo
 
 #Tao he thong K8S
@@ -36,7 +38,7 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_
 chmod 755 get_helm.sh
 ./get_helm.sh
 helm init
-echo "\n\n"
+echo "\n"
 
 #-----------------Setup Permissions in the cluster for Helm (install packet in helm)-------#
 echo "------------Setup Permissions tren K8S de cai packet tren Helm------------------------"
@@ -74,7 +76,7 @@ echo "\n"
 echo "#-------------------------------------------------------------------#"
 echo "#                   Chuyen den thu muc source code                  #"
 echo "#-------------------------------------------------------------------#"
-cd ../demo-app/
+cd ..
 echo "------------------------------------"
 pwd
 echo "------------------------------------"
@@ -96,9 +98,9 @@ echo "\n\n"
 echo "#-------------------------------------------------------------------#"
 echo "#        Push source code len repository registry Google Cloud      #"
 echo "#-------------------------------------------------------------------#"
+gcloud source repos create demo-jenkins
 git init
 git config credential.helper gcloud.sh
-gcloud source repos create demo-jenkins
 git remote add origin https://source.developers.google.com/p/vn-cloudace-dataengine-2018/r/demo-jenkins
 git config --global user.email "dinh@cloud-ace.com"
 git config --global user.name "dinh@cloud-ace.com"
