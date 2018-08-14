@@ -58,7 +58,6 @@ echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
-cd ..
 helm install --name my-jenkins stable/jenkins -f jenkins/values.yaml 
 echo "\n"
 
@@ -76,7 +75,6 @@ echo "\n"
 echo "#-------------------------------------------------------------------#"
 echo "#                   Chuyen den thu muc source code                  #"
 echo "#-------------------------------------------------------------------#"
-cd ..
 cd demo-app/
 echo "------------------------------------"
 pwd
