@@ -7,7 +7,8 @@ Master:
     - git:3.9.1
     - google-oauth-plugin:0.6
     - google-source-plugin:0.3
-    - blueocean:1.7.2
+    - blueocean:1.8.0
+    - simple-theme-plugin:0.4
   Cpu: "1"
   Memory: "4000Mi"
   JavaOpts: "-Xms3500m -Xmx3500m"
