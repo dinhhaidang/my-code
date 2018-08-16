@@ -46,10 +46,6 @@ const (
 	  <td>{{.Name}}</td>
 	</tr>
 	<tr>
-	  <td>Version</td>
-	  <td>{{.Version}}</td>
-	</tr>
-	<tr>
 	  <td>ID</td>
 	  <td>{{.Id}}</td>
 	</tr>
