@@ -1,5 +1,6 @@
 
 cd demo-app/
+kubectl delete namespaces production
 kubectl create ns production
 kubectl --namespace=production apply -f k8s/production
 kubectl --namespace=production apply -f k8s/canary
