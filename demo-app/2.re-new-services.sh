@@ -1,7 +1,7 @@
 
 cd demo-app/
 kubectl delete namespaces production
-sleep 15s
+sleep 1m
 kubectl create ns production
 kubectl --namespace=production apply -f k8s/production
 kubectl --namespace=production apply -f k8s/canary
