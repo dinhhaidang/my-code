@@ -62,7 +62,7 @@ echo "#----------------------Dang cai dat Jenkins-------------------------#"
 helm install -n cd stable/jenkins -f jenkins/values.yaml --wait
 echo "\n"
 
-echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
+echo "#---------------Setup Cockpit - Visual Pod on K8S-------------------#"
 kubectl create namespace cockpit-demo
 kubectl create -f cockpit.json -n cockpit-demo
 echo "\n"
