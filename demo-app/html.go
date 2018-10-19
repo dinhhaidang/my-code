@@ -36,7 +36,7 @@ const (
 
 <div class="card blue">
 <div class="card-content white-text">
-<div class="card-title">Demo Canary Release</div>
+<div class="card-title">CLOUD ACE - CI/CD Canary Release</div>
 </div>
 <div class="card-content white">
 <table class="bordered">
