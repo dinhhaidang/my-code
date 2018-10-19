@@ -58,7 +58,7 @@ echo "#-------------------------------------------------------------------#"
 echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
-echo "#-----------------Setup Jenkins----------------------#"
+echo "#----------------------Dang cai dat Jenkins-------------------------#"
 helm install -n cd stable/jenkins -f jenkins/values.yaml --wait
 echo "\n"
 
