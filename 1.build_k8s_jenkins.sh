@@ -7,6 +7,7 @@
 
 #----------------Setup moi truong K8S--------------------#
 #Cau hinh zone mac dinh tren GCP
+clear
 gcloud config set compute/zone asia-east1-a
 
 echo "#-------------------------------------------------------------------#"
