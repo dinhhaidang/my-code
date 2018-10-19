@@ -59,7 +59,7 @@ echo "#         Chuan bi setup jenkins, se bat dau trong 1 phut...        #"
 echo "#-------------------------------------------------------------------#"
 sleep 1m
 echo "#-----------------Setup Jenkins----------------------#"
-helm install -n cd stable/jenkins -f jenkins/values.yaml --version 0.16.6 --wait
+helm install -n cd stable/jenkins -f jenkins/values.yaml --wait
 echo "\n"
 
 echo "----------------Setup Cockpit - Visual Pod on K8S-----------------------"
@@ -96,9 +96,9 @@ echo "#-------------------------------------------------------------------#"
 gcloud source repos create demo-jenkins
 git init
 git config credential.helper gcloud.sh
-git remote add origin https://source.developers.google.com/p/vn-cloudace-dataengine-2018/r/demo-jenkins
-git config --global user.email "dangdh@ecoe.vn"
-git config --global user.name "dangdh@ecoe.vn"
+git remote add origin https://source.developers.google.com/p/gcp-seminar-demo/r/demo-jenkins
+git config --global user.email "dinh@cloud-ace.com"
+git config --global user.name "dinh@cloud-ace.com"
 git add .
 git commit -m "Initial commit"
 git push origin master
