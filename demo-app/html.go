@@ -36,7 +36,7 @@ const (
 
 <div class="card blue">
 <div class="card-content white-text">
-<div class="card-title">Backend that serviced this request</div>
+<div class="card-title">Demo Canary Release</div>
 </div>
 <div class="card-content white">
 <table class="bordered">
@@ -74,25 +74,6 @@ const (
 </div>
 </div>
 
-<div class="card blue">
-<div class="card-content white-text">
-<div class="card-title">Proxy that handled this request</div>
-</div>
-<div class="card-content white">
-<table class="bordered">
-  <tbody>
-	<tr>
-	  <td>Address</td>
-	  <td>{{.ClientIP}}</td>
-	</tr>
-	<tr>
-	  <td>Request</td>
-	  <td>{{.LBRequest}}</td>
-	</tr>
-<tr>
-  <td>Error</td>
-  <td>{{.Error}}</td>
-</tr>
 </tbody>
 </table>
 </div>
