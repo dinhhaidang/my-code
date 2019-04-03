@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: gcr.io/gcp-seminar-demo/demo-jenkins:1.0.0
+        image: gcr.io/ecoe-k8s/demo-jenkins:1.0.0
         resources:
           limits:
             memory: "500Mi"
