@@ -1,4 +1,4 @@
-def project = 'gcp-seminar-demo'
+def project = 'ecoe-k8s'
 def  appName = 'demo'
 def  feSvcName = "${appName}-frontend"
 def  imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
@@ -37,7 +37,7 @@ spec:
 }
   }
   stages {
-    stage('Test') {
+    stage('Testing') {
       steps {
         container('golang') {
           sh """
@@ -55,26 +55,26 @@ spec:
         }
       }
     }
-    stage('Deploy Canary') {
+    stage('Trien khai Canary') {
       // Canary branch
       when { branch 'canary' }
       steps {
         container('kubectl') {
           // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#gcr.io/gcp-seminar-demo/demo-jenkins:1.0.0#${imageTag}#' ./k8s/canary/*.yaml")
+          sh("sed -i.bak 's#gcr.io/ecoe-k8s/demo-jenkins:1.0.0#${imageTag}#' ./k8s/canary/*.yaml")
           sh("kubectl --namespace=production apply -f k8s/services/")
           sh("kubectl --namespace=production apply -f k8s/canary/")
           sh("echo http://`kubectl --namespace=production get service/${feSvcName} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${feSvcName}")
         } 
       }
     }
-    stage('Deploy Production') {
+    stage('Trien khai Production') {
       // Production branch
       when { branch 'master' }
       steps{
         container('kubectl') {
         // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#gcr.io/gcp-seminar-demo/demo-jenkins:1.0.0#${imageTag}#' ./k8s/production/*.yaml")
+          sh("sed -i.bak 's#gcr.io/ecoe-k8s/demo-jenkins:1.0.0#${imageTag}#' ./k8s/production/*.yaml")
           sh("kubectl --namespace=production apply -f k8s/services/")
           sh("kubectl --namespace=production apply -f k8s/production/")
           sh("kubectl --namespace=production scale deployment gceme-frontend-production --replicas=4")
@@ -82,7 +82,7 @@ spec:
         }
       }
     }
-    stage('Deploy Dev') {
+    stage('Trien khai Dev') {
       // Developer Branches
       when { 
         not { branch 'master' } 
@@ -94,7 +94,7 @@ spec:
           sh("kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}")
           // Don't use public load balancing for development branches
           sh("sed -i.bak 's#LoadBalancer#ClusterIP#' ./k8s/services/frontend.yaml")
-          sh("sed -i.bak 's#gcr.io/gcp-seminar-demo/demo-jenkins:1.0.0#${imageTag}#' ./k8s/dev/*.yaml")
+          sh("sed -i.bak 's#gcr.io/ecoe-k8s/demo-jenkins:1.0.0#${imageTag}#' ./k8s/dev/*.yaml")
           sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/services/")
           sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/dev/")
           echo 'To access your environment run `kubectl proxy`'
