@@ -96,7 +96,7 @@ echo "#-------------------------------------------------------------------#"
 gcloud source repos create demo-jenkins
 git init
 git config credential.helper gcloud.sh
-git remote add origin https://source.developers.google.com/p/gcp-seminar-demo/r/demo-jenkins
+git remote add origin https://source.developers.google.com/p/ecoe-k8s/r/demo-jenkins
 git config --global user.email "dinh@cloud-ace.com"
 git config --global user.name "dinh@cloud-ace.com"
 git add .
