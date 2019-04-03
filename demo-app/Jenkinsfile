@@ -1,5 +1,5 @@
 def project = 'ecoe-k8s'
-def  appName = 'demo'
+def  appName = 'demo-jenkins'
 def  feSvcName = "${appName}-frontend"
 def  imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
